@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RSVP to the Love Fest 💌</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+</head>
+<body class="rsvp-body">
+  <div class="rsvp-container">
+    <h1 class="rsvp-title">RSVP to Nina & Johnny's Wedding 💍</h1>
+    <a href="index.html" class="home-button">← Back to Home</a>
+
+    <form id="rsvp-form">
+      <input type="text" name="name" placeholder="Your full name" required />
+      
+      <select name="attending" required>
+        <option value="">Will you be attending?</option>
+        <option value="yes">Yes, can’t wait!</option>
+        <option value="no">Sadly can’t make it</option>
+      </select>
+
+      <input type="text" name="guest" placeholder="Guest name (if any)" />
+
+      <select name="meal">
+        <option value="">Taco preference?</option>
+        <option value="chicken">Carne Asada</option>
+        <option value="vegan">Chicken</option>
+        <option value="surprise">Potato</option>
+      </select>
+      <p class="form-subtext">* This helps us determine ratios and does not lock you in — follow your taco heart on the big day 🌮💃</p>
+
+      <textarea name="notes" placeholder="Allergies? Song requests? Compliments?"></textarea>
+
+      <input type="password" name="password" placeholder="Wedding password 🔐" required />
+
+      <button type="submit">Send My RSVP 💌</button>
+    </form>
+    <p id="rsvp-message"></p>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

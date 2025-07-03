@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin RSVP Dashboard 💼</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+</head>
+<body class="admin-body">
+  <div class="admin-container">
+    <h1 class="admin-title">RSVP Dashboard 💼</h1>
+
+    <div id="login-box">
+      <input type="password" id="admin-password" placeholder="Enter Admin Password">
+      <button id="login-btn">Login</button>
+    </div>
+
+    <div id="rsvp-table-container" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Attending</th>
+            <th>Guest</th>
+            <th>Meal</th>
+            <th>Notes</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="rsvp-table-body"></tbody>
+      </table>
+    </div>
+
+    <p id="admin-message"></p>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const path = require("path");
+const rsvpRoutes = require("./routes/rsvp");
+
+dotenv.config();
+const app = express();
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../client"))); // Serve static frontend
+
+// Routes
+app.use("/rsvp", rsvpRoutes);
+
+mongoose.connection.on("connected", () => {
+  console.log("✅ Connected to MongoDB");
+});
+mongoose.connection.on("error", (err) => {
+  console.error("❌ MongoDB connection error:", err);
+});
+
+// MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("MongoDB error:", err));
+
+// Serve index.html on root
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/index.html"));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
