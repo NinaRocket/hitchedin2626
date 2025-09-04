@@ -4,14 +4,14 @@ const Rsvp = require("../models/Rsvp");
 
 router.post("/", async (req, res) => {
     console.log("Received RSVP:", req.body);
-  const { name, attending, guest, meal, notes, password } = req.body;
+  const { name, attending, guest, guestCount, notes, password } = req.body;
 
-  if (password !== process.env.RSVP_PASSWORD) {
-    return res.status(401).json({ error: "Invalid password" });
-  }
+  // if (password !== process.env.RSVP_PASSWORD) {
+  //   return res.status(401).json({ error: "Invalid password" });
+  // }
 
   try {
-    const newRsvp = new Rsvp({ name, attending, guest, meal, notes });
+    const newRsvp = new Rsvp({ name, attending, guest, guestCount, notes });
     await newRsvp.save();
     res.status(200).json({ message: "RSVP saved successfully!" });
   } catch (err) {

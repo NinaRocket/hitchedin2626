@@ -30,7 +30,7 @@ data.forEach(rsvp => {
     <td>${rsvp.name}</td>
     <td>${rsvp.attending}</td>
     <td>${rsvp.guest || ""}</td>
-    <td>${rsvp.meal || ""}</td>
+    <td>${rsvp.guestCount || ""}</td>
     <td>${rsvp.notes || ""}</td>
     <td>${new Date(rsvp.timestamp).toLocaleString()}</td>
   `;

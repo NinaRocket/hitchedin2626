@@ -4,7 +4,7 @@ const RsvpSchema = new mongoose.Schema({
   name: { type: String, required: true },
   attending: { type: String, required: true },
   guest: { type: String },
-  meal: { type: String },
+  guestCount: { type: String },
   notes: { type: String },
   timestamp: { type: Date, default: Date.now }
 });
