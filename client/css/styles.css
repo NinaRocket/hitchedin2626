@@ -121,7 +121,7 @@ h2 {
   font-family: 'Righteous', cursive;
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: white;
+  color: #ff3131;
 }
 
 .section-image {
@@ -131,6 +131,21 @@ h2 {
 }
 
 .section-image img {
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-image1 {
+  flex: 1;
+  max-width:240px;
+  min-width: 200px;
+  text-align: center;
+  width: 50%;
+  margin: auto;
+}
+
+.section-image1 img {
   max-width: 100%;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -374,7 +389,7 @@ table {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--nav-bg);
+  background: #ffffff85;
   border: none;
   width: 44px;
   height: 44px;
@@ -417,4 +432,85 @@ table {
 @media (max-width: 600px) {
   .slide figcaption { font-size: .85rem; }
   .slideshow .nav { width: 38px; height: 38px; font-size: 1.2rem; }
+}
+
+/* === Theme: Black/White + Quicksand === */
+:root{
+  --ink: #111;     /* default text on light */
+  --paper: #fff;   /* light background */
+  --coal: #000;    /* dark background */
+}
+
+/* Font + global base */
+html, body {
+  font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--paper);   /* white */
+  color: var(--ink);          /* near-black */
+  text-align: center;
+}
+
+/* Hero becomes white */
+.hero {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Name chips + CTA to pop in the white hero */
+.name {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--coal);
+  color: var(--paper);
+}
+.cta-button {
+  background: #ff3131;
+  color: var(--paper);
+}
+
+/* Section layout keeps the split columns, but colors alternate */
+.section {
+  padding: 4rem 2rem;
+  color: inherit; /* inherit from alternators below */
+}
+
+/* Alternating backgrounds & text colors */
+main .section:nth-of-type(even) {
+  background: var(--paper);  /* white */
+  color: var(--ink);
+}
+main .section:nth-of-type(odd) {
+  background: var(--coal);   /* black */
+  color: var(--paper);
+}
+
+/* Headings inherit current color and use Quicksand */
+.section-text h2 {
+  font-family: 'Quicksand', sans-serif;
+  color: #ff3131;
+  font-weight: 700;
+}
+
+/* Links match the text color in each section */
+.section a {
+  color: currentColor;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Slideshow controls adapt to light/dark sections */
+.section:nth-of-type(odd) .slideshow {
+  --nav-bg: rgba(0,0,0,.7);
+  --dot-border: #000;
+  --dot-active: #000;
+}
+.section:nth-of-type(even) .slideshow {
+  --nav-bg: rgba(255,255,255,.9);
+  --dot-border: #fff;
+  --dot-active: #fff;
+}
+
+/* Optional: make body h2 (outside sections) use Quicksand too */
+h2, h3 { font-family: 'Quicksand', sans-serif; }
+
+.heart-svg{
+  width:40px;
 }
