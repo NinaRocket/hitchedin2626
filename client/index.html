@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="icon" href="./assets/hearts.svg" type="image/png">
   <title>We're Getting Hitched!</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
@@ -15,43 +16,30 @@
 <body>
   <header class="hero">
     <div class="overlay">
-      <!-- <h1><span class="name">Nina</span> and <span class="name">Johnny</span></h1> -->
-       <h1>JOHNNY & NINA    <img class="heart-svg" src="assets/hearts.svg" alt=""></h1>
+       <h1> JOHNNY & NINA</h1>
        <img src="assets/eloping.svg" alt="">
-      <!-- <h2>are eloping! </h2> -->
+  
       <h3>And we would love to celebrate with you!</h3>
-      <br>
-      <!-- <div id="countdown" class="countdown"></div> -->
-      <a href="rsvp.html" class="cta-button">RSVP Now</a>
-        <!-- <img class="heart-svg" src="assets/hearts.svg" alt=""> -->
-      <!-- <div class="scroll-down">↓ Scroll for Details ↓</div> -->
+<div class="btn-div">
+  <div class="cta-bouncer">
+    <a href="rsvp.html" class="cta-button">RSVP Now</a>
+  </div>
+
+  <div class="cta-bouncer">
+    <a href="#registry" class="cta-button registry-btn">Registry</a>
+  </div>
+</div>
+
+
+
     </div>
   </header>
 
   <main>
+    <!-- story -->
     <section class="section section-story">
       <div class="section-inner">
-        <div class="section-text">
-          <h2>How We Met | A Poem   <img class="heart-svg" src="assets/red hearts.svg" alt=""></h2>
-       
-          <p>
-            Microsoft Teams 8 hours a day
-            <br>
-            we made work feel like play
-            <br>
-            lorem ipsum and css
-            <br>
-            as a team, we worked the best
-            <br>
-            flirty giggles and adoring eyes
-            <br>
-            then one day, we would say... <br>
-            "Hey, let's take this offline"
-
-          </p>
-        </div>
-        <div class="section-image">
-          <!-- <img src="assets/our-story.png" alt="Our Story photo" /> -->
+             <div class="section-image">
           <!-- Slideshow -->
           <div class="slideshow" aria-label="Photo gallery" data-autoplay="true" data-interval="4000">
             <div class="slides">
@@ -97,7 +85,7 @@
                 <img src="assets/jnbrick.jpeg" alt="Goofy faces at the fair">
                 <!-- <figcaption>Goofy fair faces</figcaption> -->
               </figure>
-            </div>
+       </div>
 
             <button class="nav prev" aria-label="Previous slide">‹</button>
             <button class="nav next" aria-label="Next slide">›</button>
@@ -105,17 +93,28 @@
             <!-- Dots will be generated here -->
             <div class="dots" role="tablist" aria-label="Choose slide"></div>
           </div>
-
         </div>
-      </div>
+        <div class="section-text">
+          <h2>How We Met   <img class="heart-svg" src="assets/red hearts.svg" alt=""></h2>
+       <p style="text-align: left;">
+        It was a spring day in April of 2022. Johnny and Nina had just started a new job together. They worked virtually so had not met in person but worked together on Microsoft Teams video. 
+        <br><br>
+        As they trained and learned together, their calls started getting longer and longer as they got to know each other and enjoyed each other's company. It wasn't long until they were spending their entire 8 hour shift on video together. Working and smiling. <br><br>
+        They met in person towards the end of July 2022 and that is when Nina decided she was in love and needed to make her move. A couple months later they began dating. After months of dating they began building a life together. 
+        <br><br>
+        Today, they are together nearly 24/7 and love every minute of it! Truly best friends who play games together, craft together, family activities, explore new hobbies, new places and adventures, hike, workout, just two peas in a pod! And most importantly, support and take care of each other in every way. Not a single doubt that they are forever mates and ready to make it official!
+       </p>
+        </div>
+   
     </section>
 
-    <section class="section section-schedule">
+    <!-- party details -->
+    <section class="section section-party">
       <div class="section-inner reverse">
         <div class="section-text">
           <!-- <h2>Party Details</h2> -->
           <img src="assets/celebration of love.svg" alt="">
-          <p>Come join us for a humble backyard reception! We'll supply the cake, pizza, snacks, drinks and fun! Come
+          <p>Come join us for a humble backyard reception! We'll supply the cake, food, snacks, drinks and fun! Come
             anytime between 4pm and 9pm, dress casually and enjoy the love and fun!</p>
           <ul>
             <li><strong>Date:</strong> Saturday | November 22, 2025</li>
@@ -149,29 +148,30 @@
               <div class="dots" role="tablist" aria-label="Choose slide"></div>
             </div>
 
-          </div>
         </div>
-        </div>
-      </div>
     </section>
 
-
+<!-- registry -->
+   <a class="anchor" name="registry"></a>
     <section class="section section-registry">
       <div class="section-inner">
         <div class="section-text">
           <h2>Gifts & Registry <img class="heart-svg" src="assets/red hearts.svg" alt=""></h2>
           <p>Your presence is our present - but if your heart feels compelled to offer a gift, bring what your heart desires or
-            help us have a magical Honeymoon in Disneyland <a
-              href="https://www.honeyfund.com/site/rocket-grenz-11-11-2025">Honeymoon Fund</a>.</p>
-          <p>And/Or donate to our non-profit <a
-              href="https://www.zeffy.com/en-US/fundraising/support-jazmines-journeys-mission--2025">Jazmine's
-              Journey</a></p>
+            help us have a magical Honeymoon in Disneyland or start this new chapter in our lives! 
+<br><br>
+
+              <button class="cta-registry"><a
+              href="https://www.honeyfund.com/site/rocket-grenz-11-11-2025" target="_blank">Wedding Fund</a></button>
+              <br><br>
+              <p>And/Or donate to our non-profit to support families impacted by childhood cancer and childhood cancer research!</p>
+              <button class="cta-registry"><a
+              href="https://www.zeffy.com/en-US/fundraising/support-jazmines-journeys-mission--2025" target="_blank">Jazmine's
+              Journey</a></button>
         </div>
         <div class="section-image">
-          <!-- <img src="assets/registry.png" alt="Registry image" /> -->
-
           <!-- Slideshow -->
-          <div class="slideshow" aria-label="Photo gallery" data-autoplay="true" data-interval="4000">
+        <div class="slideshow" aria-label="Photo gallery" data-autoplay="true" data-interval="4000">
             <div class="slides">
               <figure class="slide is-active">
                 <img src="assets/jndisney1.jpeg" alt="Nina and Johnny laughing">
@@ -189,8 +189,6 @@
               <!-- Dots will be generated here -->
               <div class="dots" role="tablist" aria-label="Choose slide"></div>
             </div>
-
-          </div>
         </div>
     </section>
   </main>

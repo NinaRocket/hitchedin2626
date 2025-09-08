@@ -1,23 +1,81 @@
-/* Reset and base */
-body, html {
+:root{
+  /* palette */
+  --c-navy:#001219;
+  --c-teal-900:#005F73;
+  --c-teal-700:#0A9396;
+  --c-mint:#94D2BD;
+  --c-sand:#E9D8A6;
+  --c-amber:#EE9B00;
+  --c-orange:#CA6702;
+  --c-russet:#BB3E03;
+  --c-red:#AE2012;
+  --c-oxblood:#9B2226;
+
+  /* theme */
+  --ink:#001219;
+  --paper:#ffffff;
+  --dark:#001219;
+  --light:#ffffff;
+  --accent:#EE9B00;
+  --accent-hover:#CA6702;
+}
+html, body {
   margin: 0;
   padding: 0;
-  font-family: 'DM Sans', sans-serif;
-  background-color: #ff39a7;
-  color: white;
+  font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background:  var(--c-sand);
+  color: var(--ink);
   text-align: center;
 }
 
-/* Hero section */
+/* hero = white, with palette accents */
+/* ---------- HERO ---------- */
 .hero {
-  background: linear-gradient(to bottom right, #ff39a7, #6a00f4);
-  height: 50vh; /* was 100vh */
+   background:  var(--c-sand);
+  height: 50vh;                   /* keep your shorter hero */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   text-align: center;
 }
+h1{
+  color:#005F73;
+}
+ul li{
+  text-align: left;
+}
+.overlay img.heart-svg{ height:1.1em; vertical-align:-0.18em; margin-left:.25rem; }
+.overlay {
+  padding: 2rem;
+}
+
+/* CTA in amber */
+.cta-button {
+  text-decoration: none;
+  background: var(--c-teal-900);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.cta-registry {
+  text-decoration: none;
+  background: var(--c-teal-900);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  transition: transform .2s ease, background .2s ease;
+}
+.registry-btn{
+  background-color:var(--c-oxblood);
+}
+
 .scroll-down {
   font-size: 1.2rem;
   color: white;
@@ -25,16 +83,23 @@ body, html {
   animation: bounce 1.5s infinite;
   font-family: 'Righteous', cursive;
 }
+/* split layout stays the same */
+.section{ padding:4rem 2rem; }
 
+/* links adapt to each section */
+.section a{ color:currentColor; text-underline-offset:2px; }
+
+
+.section-story{
+  background: var(--c-mint);
+}
+.section-registry{
+   background: var(--c-mint);
+}
 /* cute bounce animation */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
-}
-
-
-.overlay {
-  padding: 2rem;
 }
 
 .name {
@@ -60,21 +125,6 @@ h2 {
   font-weight: bold;
 }
 
-/* CTA button */
-.cta-button {
-  text-decoration: none;
-  background: white;
-  color: #ff39a7;
-  font-weight: bold;
-  padding: 0.75rem 2rem;
-  border-radius: 999px;
-  font-size: 1.2rem;
-  transition: transform 0.2s ease;
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-}
 .content-block {
   max-width: 800px;
   margin: 4rem auto;
@@ -91,11 +141,6 @@ h2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
 }
-/* Section layout */
-.section {
-  padding: 4rem 2rem;
-  color: white;
-}
 
 .section-inner {
   display: flex;
@@ -109,19 +154,6 @@ h2 {
 
 .section-inner.reverse {
   flex-direction: row-reverse;
-}
-
-.section-text {
-  flex: 1;
-  min-width: 280px;
-  text-align: left;
-}
-
-.section-text h2 {
-  font-family: 'Righteous', cursive;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #ff3131;
 }
 
 .section-image {
@@ -151,89 +183,108 @@ h2 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Unique section backgrounds */
-.section-story { background-color: #ff9a3c; }
-.section-schedule { background-color: #6a00f4; }
-.section-venue { background-color: #ff39a7; }
-.section-accommodation { background-color: #2d1e2f; }
-.section-travel { background-color: #4d4eff; }
-.section-dresscode { background-color: #00c49a; }
-.section-registry { background-color: #ffa8a8; }
-.section-faqs { background-color: #5e239d; }
-.section-contact { background-color: #ff70a6; }
-
 
 /* RSVP styles */
+/* === RSVP page – themed === */
 .rsvp-body {
-  background: #fff0f7;
-  color: #6a00f4;
-  font-family: 'DM Sans', sans-serif;
+  /* soft sand → white wash */
+  background: linear-gradient(180deg, var(--c-sand) 0%, #ffffff 55%);
+  color: var(--ink);
+  font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   padding: 2rem;
 }
 
 .rsvp-container {
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
-  background: #ffffff;
-  border: 3px dashed #ff39a7;
-  border-radius: 25px;
+  background: var(--paper);
+  border: 3px dashed var(--c-mint);
+  border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0,18,25,.08);
 }
 
 .rsvp-title {
-  font-family: 'Righteous', cursive;
-  color: #ff39a7;
+  font-family: 'Quicksand', sans-serif;
+  color: var(--c-navy);
+  font-weight: 700;
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 
-form input, form select, form textarea {
+form input,
+form select,
+form textarea {
+  font-family: Quicksand;
   display: block;
-  width: 100%;
+  width: -webkit-fill-available;
   margin-bottom: 1rem;
-  padding: 0.75rem;
-  border: 2px solid #ff9a3c;
-  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  border: 2px solid var(--accent);          /* amber */
+  border-radius: 12px;
   font-size: 1rem;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color .15s ease, box-shadow .15s ease;
 }
 
+form input::placeholder,
+form textarea::placeholder {
+  color: #6b7b83;
+  opacity: .9;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--accent-hover);         /* orange */
+  box-shadow: 0 0 0 3px rgba(148,210,189,.45);/* mint glow */
+}
+
+/* primary action */
 form button {
-  background: #6a00f4;
-  color: white;
+  background: var(--accent);                 /* amber */
+  color: var(--dark);                        /* navy text for contrast */
   border: none;
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: transform .15s ease, background .15s ease;
+}
+form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+/* helper text under fields */
+.form-subtext {
+  font-size: .9rem;
+  color: var(--c-teal-900);
+  font-style: italic;
+  margin-top: -.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
-form button:hover {
-  background: #4800a8;
-}
-
-#rsvp-message {
-  font-size: 1rem;
-  margin-top: 1rem;
-}
+/* back home button */
 .home-button {
   display: inline-block;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
+  margin-bottom: 1.25rem;
+  font-size: .95rem;
+  font-weight: 700;
   text-decoration: none;
-  color: #ff39a7;
-  border: 2px solid #ff39a7;
-  padding: 0.4rem 1rem;
+  color: var(--ink);
+  background: var(--c-mint);
+  border: 2px solid var(--ink);
+  padding: 0.45rem 1rem;
   border-radius: 999px;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
 }
+.home-button:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
 
-.home-button:hover {
-  background-color: #ff39a7;
-  color: white;
-}
+/* status message */
+#rsvp-message { font-size: 1rem; margin-top: 1rem; color: var(--c-teal-700); }
+
 
 
 /* admin page */
@@ -313,7 +364,6 @@ thead th {
 
 .form-subtext {
   font-size: 0.9rem;
-  color: #6a00f4;
   font-style: italic;
   margin-top: -0.5rem;
   margin-bottom: 1rem;
@@ -336,7 +386,7 @@ table {
   --dot-active: #ffffff;
 
   position: relative;
-  max-width: 1000px;
+  max-width: 500px;
   margin: 2rem auto;
   border-radius: 20px;
   overflow: hidden;
@@ -418,8 +468,7 @@ table {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2px solid var(--dot-border);
-  background: transparent;
+  border: white;
   opacity: .75;
   cursor: pointer;
 }
@@ -441,19 +490,6 @@ table {
   --coal: #000;    /* dark background */
 }
 
-/* Font + global base */
-html, body {
-  font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: var(--paper);   /* white */
-  color: var(--ink);          /* near-black */
-  text-align: center;
-}
-
-/* Hero becomes white */
-.hero {
-  background: var(--paper);
-  color: var(--ink);
-}
 
 /* Name chips + CTA to pop in the white hero */
 .name {
@@ -461,31 +497,10 @@ html, body {
   background: var(--coal);
   color: var(--paper);
 }
-.cta-button {
-  background: #ff3131;
-  color: var(--paper);
-}
-
-/* Section layout keeps the split columns, but colors alternate */
-.section {
-  padding: 4rem 2rem;
-  color: inherit; /* inherit from alternators below */
-}
-
-/* Alternating backgrounds & text colors */
-main .section:nth-of-type(even) {
-  background: var(--paper);  /* white */
-  color: var(--ink);
-}
-main .section:nth-of-type(odd) {
-  background: var(--coal);   /* black */
-  color: var(--paper);
-}
-
 /* Headings inherit current color and use Quicksand */
 .section-text h2 {
   font-family: 'Quicksand', sans-serif;
-  color: #ff3131;
+  color: var(--c-navy);
   font-weight: 700;
 }
 
@@ -496,21 +511,73 @@ main .section:nth-of-type(odd) {
   text-underline-offset: 2px;
 }
 
-/* Slideshow controls adapt to light/dark sections */
-.section:nth-of-type(odd) .slideshow {
-  --nav-bg: rgba(0,0,0,.7);
-  --dot-border: #000;
-  --dot-active: #000;
-}
-.section:nth-of-type(even) .slideshow {
-  --nav-bg: rgba(255,255,255,.9);
-  --dot-border: #fff;
-  --dot-active: #fff;
-}
-
 /* Optional: make body h2 (outside sections) use Quicksand too */
-h2, h3 { font-family: 'Quicksand', sans-serif; }
+h2, h3 
+{
+   font-family: 'Quicksand', sans-serif; 
+   color:var(--c-navy);
+}
 
 .heart-svg{
   width:40px;
 }
+
+/* Hero RSVP bounce */
+/* Bounce the hero RSVP button */
+.hero .cta-button {
+  animation: rsvp-bounce 2.2s ease-in-out infinite;
+  will-change: transform;
+  box-shadow: 0 12px 24px rgba(0,18,25,.15);
+}
+
+/* Kill the animation on hover/focus so hover transform applies */
+.hero .cta-button:hover,
+.hero .cta-button:focus-visible {
+  animation: none;                           /* <- key line */
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 28px rgba(0,18,25,.22);
+}
+
+.hero .cta-button:active { transform: translateY(0) scale(.98); }
+
+@keyframes rsvp-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero .cta-button { animation: none; }
+}
+
+.cta-bouncer { display: inline-block; animation: rsvp-bounce 2.2s ease-in-out infinite; }
+.cta-button:hover,
+.cta-button:focus-visible { 
+  transform: translateY(-3px) scale(1.03);
+  background:#0A9396;
+ }
+
+ /* Button row spacing */
+.btn-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;              /* << increase this for more space (e.g., 2rem) */
+  margin-top: 2rem;         /* optional: adds space above the row */
+  flex-wrap: wrap;           /* keeps them tidy on small screens */
+}
+
+/* if any child wrappers had margins, neutralize them */
+.btn-div > * { margin: 0; }
+
+/* (optional) make the gap larger or stack on very small screens */
+@media (max-width: 420px){
+  .btn-div { gap: 1.5rem; }
+  /* or stack:
+  .btn-div { flex-direction: column; gap: .75rem; }
+  */
+}
+
+
+

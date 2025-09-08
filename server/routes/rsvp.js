@@ -4,11 +4,8 @@ const Rsvp = require("../models/Rsvp");
 
 router.post("/", async (req, res) => {
     console.log("Received RSVP:", req.body);
-  const { name, attending, guest, guestCount, notes, password } = req.body;
+  const { name, attending, guest, guestCount, notes } = req.body;
 
-  // if (password !== process.env.RSVP_PASSWORD) {
-  //   return res.status(401).json({ error: "Invalid password" });
-  // }
 
   try {
     const newRsvp = new Rsvp({ name, attending, guest, guestCount, notes });
@@ -19,6 +16,7 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 router.get("/admin", async (req, res) => {
   const password = req.query.password;
@@ -33,6 +31,25 @@ router.get("/admin", async (req, res) => {
   } catch (err) {
     console.error("Error fetching RSVPs:", err);
     res.status(500).json({ error: "Server error" });
+  }
+});
+// ADMIN DELETE: DELETE /rsvp/:id?password=...
+router.delete("/admin/:id", async (req, res) => {
+  const { id } = req.params;
+  const password = req.query.password;
+
+  if (password !== process.env.ADMIN_PASSWORD) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    console.log("Attempting delete:", { id });
+    const deleted = await Rsvp.findByIdAndDelete(id);
+    if (!deleted) return res.status(404).json({ error: "RSVP not found" });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Error deleting RSVP:", err);
+    res.status(500).json({ error: err.message || "Server error" });
   }
 });
 

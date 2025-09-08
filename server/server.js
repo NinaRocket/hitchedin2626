@@ -13,6 +13,11 @@ app.use(express.static(path.join(__dirname, "../client"))); // Serve static fron
 // Routes
 app.use("/rsvp", rsvpRoutes);
 
+const rsvpPublic = require("./routes/rsvp");   // public submit
+const rsvpAdmin  = require("./routes/admin");  // admin list/delete
+app.use("/rsvp", rsvpPublic);
+app.use("/admin", rsvpAdmin);
+
 mongoose.connection.on("connected", () => {
   console.log("✅ Connected to MongoDB");
 });

@@ -33,9 +33,44 @@ data.forEach(rsvp => {
     <td>${rsvp.guestCount || ""}</td>
     <td>${rsvp.notes || ""}</td>
     <td>${new Date(rsvp.timestamp).toLocaleString()}</td>
+    <td class="actions">
+     <button class="btn-link danger" data-id="${rsvp._id}">Delete</button>
+     </td>
   `;
 
   body.appendChild(row);
 });
+// Event delegation for delete clicks
+document.getElementById("rsvp-table-body").addEventListener("click", async (e) => {
+  const btn = e.target.closest(".btn-link.danger");
+  if (!btn) return;
+
+  const id = btn.dataset.id;
+  if (!id) return;
+
+  const row = btn.closest("tr");
+  const name = row?.firstElementChild?.textContent?.trim() || "this RSVP";
+
+  if (!confirm(`Delete ${name}? This cannot be undone.`)) return;
+
+  const res = await fetch(`/admin/${encodeURIComponent(id)}`, {
+    method: "DELETE"
+  });
+
+  if (res.ok) {
+    row.remove();
+    // update count text
+    const msg = document.getElementById("admin-message");
+    const remaining = document.querySelectorAll("#rsvp-table-body tr").length;
+    msg.textContent = `✅ Showing ${remaining} RSVPs`;
+  } else {
+    const { error } = await res.json().catch(() => ({ error: "Failed to delete" }));
+    alert(`❌ ${error || "Failed to delete"}`);
+  }
+});
+
 
 });
+
+
+
