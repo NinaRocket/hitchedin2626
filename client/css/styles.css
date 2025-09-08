@@ -84,7 +84,7 @@ ul li{
   font-family: 'Righteous', cursive;
 }
 /* split layout stays the same */
-.section{ padding:4rem 2rem; }
+.section{ padding:2rem 2rem; }
 
 /* links adapt to each section */
 .section a{ color:currentColor; text-underline-offset:2px; }
@@ -149,7 +149,7 @@ h2 {
   max-width: 1000px;
   margin: 0 auto;
   flex-wrap: wrap;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 
 .section-inner.reverse {
@@ -162,11 +162,11 @@ h2 {
   text-align: center;
 }
 
-.section-image img {
+/* .section-image img {
   max-width: 100%;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
+} */
 
 .section-image1 {
   flex: 1;
@@ -564,7 +564,7 @@ h2, h3
   justify-content: center;
   align-items: center;
   gap: 1.25rem;              /* << increase this for more space (e.g., 2rem) */
-  margin-top: 2rem;         /* optional: adds space above the row */
+  /* margin-top: 2rem;        */
   flex-wrap: wrap;           /* keeps them tidy on small screens */
 }
 
