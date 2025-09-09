@@ -1,7 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const Rsvp = require("../models/Rsvp");
+// backend/server/routes/admin.js (ESM)
+import { Router } from "express";
+import mongoose from "mongoose";
+import Rsvp from "../models/Rsvp.js";
+
+const router = Router();
 
 // GET /admin?password=...
 router.get("/", async (req, res) => {
@@ -10,7 +12,7 @@ router.get("/", async (req, res) => {
     return res.status(401).json({ error: "Unauthorized" });
   }
   try {
-    const rsvps = await Rsvp.find().sort({ timestamp: -1 }); // you already store timestamp
+    const rsvps = await Rsvp.find().sort({ timestamp: -1 });
     res.json(rsvps);
   } catch (err) {
     console.error("Error fetching RSVPs:", err);
@@ -40,4 +42,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

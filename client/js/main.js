@@ -1,29 +1,4 @@
-const countdownEl = document.getElementById("countdown");
-
-// 👰 Set your wedding date here!
-const weddingDate = new Date("2026-02-06T00:00:00");
-
-function updateCountdown() {
-  const now = new Date();
-  const diff = weddingDate - now;
-
-  if (diff <= 0) {
-    countdownEl.textContent = "🎉 It's wedding time!";
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-
-setInterval(updateCountdown, 1000);
-
-
-const form = document.getElementById("rsvp-form");
+const form = document.getElementById("rsvp-form");   // make sure your HTML id matches this
 const message = document.getElementById("rsvp-message");
 
 if (form) {
@@ -33,23 +8,31 @@ if (form) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
-    const res = await fetch("/rsvp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const res = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
 
-    const result = await res.json();
-    if (res.ok) {
-      message.textContent = "🎉 RSVP received! Thank you!";
+      // Try to parse JSON, but don’t crash if the body is empty/HTML
+      let payload = null;
+      try { payload = await res.json(); } catch { /* ignore */ }
+
+      if (!res.ok) {
+        message && (message.textContent = `❌ ${payload?.error || `Server error (${res.status})`}`);
+        return;
+      }
+
+      message && (message.textContent = "🎉 RSVP received! Thank you!");
       form.reset();
-    } else {
-      message.textContent = `❌ ${result.error || "Something went wrong!"}`;
+    } catch (err) {
+      console.error(err);
+      message && (message.textContent = "❌ Network error — is the backend running?");
     }
   });
 }
+
 class Slideshow {
   constructor(root) {
     this.root = root;

@@ -27,8 +27,9 @@ app.use(cors({
 }));
 
 // Routes (NOTE: backend serves /rsvp and /admin; Vercel rewrites /api/* → this host)
-app.use("/rsvp", rsvpPublic);
-app.use("/admin", rsvpAdmin);
+app.use("/api/rsvp", rsvpPublic);
+app.use("/api/admin", rsvpAdmin);
+
 
 // Health check
 app.get("/api/health", (_req, res) => res.json({ ok: true, time: new Date().toISOString() }));
