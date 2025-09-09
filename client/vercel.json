@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://api.ninajohnny4ever.com/$1" }
+    { "source": "/api/(.*)", "destination": "https://api.ninajohnny4ever.com/api/$1" }
   ]
 }
