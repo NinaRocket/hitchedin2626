@@ -118,13 +118,6 @@ h2 {
   font-size: 1.8rem;
 }
 
-/* Countdown */
-.countdown {
-  font-size: 2rem;
-  margin: 1.5rem 0;
-  font-weight: bold;
-}
-
 .content-block {
   max-width: 800px;
   margin: 4rem auto;
