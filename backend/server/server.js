@@ -7,6 +7,14 @@ const rsvpRoutes = require("./routes/rsvp");
 dotenv.config();
 const app = express();
 
+import cors from 'cors';
+const allowed = ['https://ninajohnny4ever.com'];
+app.use(cors({
+  origin: (origin, cb) => cb(null, !origin || allowed.includes(origin)),
+  credentials: true
+}));
+
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client"))); // Serve static frontend
 
@@ -38,4 +46,4 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log('API on', PORT));
