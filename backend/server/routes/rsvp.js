@@ -1,6 +1,8 @@
 const express = require("express");
-const router = express.Router();
+// const router = express.Router();
 const Rsvp = require("../models/Rsvp");
+import { Router } from "express";
+const router = Router();
 
 router.post("/", async (req, res) => {
     console.log("Received RSVP:", req.body);

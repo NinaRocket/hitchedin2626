@@ -2,12 +2,13 @@
   "name": "wedding-backend",
   "version": "1.0.0",
   "description": "Backend server for Nina & Johnny's wedding RSVP 💍",
-  "main": "server.js",
+  "type": "module",
+  "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js"
   },
-  "keywords": [],
+  "engines": { "node": ">=20" },
   "author": "Nina Rocket",
   "license": "MIT",
   "dependencies": {

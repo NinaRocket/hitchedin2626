@@ -1,49 +1,49 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const path = require("path");
-const rsvpRoutes = require("./routes/rsvp");
+// backend/server/server.js  (ESM)
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
+
+// If your route files are CommonJS (`module.exports = router`) this still works:
+// ESM default import will grab module.exports.
+import rsvpPublic from "./routes/rsvp.js";   // public submit/list/etc.
+import rsvpAdmin  from "./routes/admin.js";  // admin-only routes
 
 dotenv.config();
-const app = express();
 
-import cors from 'cors';
-const allowed = ['https://ninajohnny4ever.com'];
+const app = express();
+app.use(express.json());
+
+// CORS — lock to your site(s)
+const allowed = (process.env.CLIENT_ORIGIN_LIST ||
+  "https://ninajohnny4ever.com,https://www.ninajohnny4ever.com")
+  .split(",")
+  .map(s => s.trim())
+  .filter(Boolean);
+
 app.use(cors({
   origin: (origin, cb) => cb(null, !origin || allowed.includes(origin)),
   credentials: true
 }));
 
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "../client"))); // Serve static frontend
-
-// Routes
-app.use("/rsvp", rsvpRoutes);
-
-const rsvpPublic = require("./routes/rsvp");   // public submit
-const rsvpAdmin  = require("./routes/admin");  // admin list/delete
+// Routes (NOTE: backend serves /rsvp and /admin; Vercel rewrites /api/* → this host)
 app.use("/rsvp", rsvpPublic);
 app.use("/admin", rsvpAdmin);
 
-mongoose.connection.on("connected", () => {
-  console.log("✅ Connected to MongoDB");
-});
-mongoose.connection.on("error", (err) => {
-  console.error("❌ MongoDB connection error:", err);
-});
+// Health check
+app.get("/api/health", (_req, res) => res.json({ ok: true, time: new Date().toISOString() }));
 
-// MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("MongoDB error:", err));
+// --- MongoDB ---
+const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+if (!mongoUri) {
+  console.warn("⚠️  No MONGODB_URI/MONGO_URI set; skipping DB connect.");
+} else {
+  mongoose.connect(mongoUri)
+    .then(() => console.log("✅ MongoDB connected"))
+    .catch(err => console.error("❌ MongoDB error:", err));
+}
+mongoose.connection.on("error", err => console.error("❌ MongoDB connection error:", err));
 
-// Serve index.html on root
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/index.html"));
-});
-
+// --- Start server ---
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => console.log('API on', PORT));
+app.listen(PORT, "0.0.0.0", () => console.log(`API listening on ${PORT}`));
