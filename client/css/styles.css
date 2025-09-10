@@ -112,7 +112,10 @@ ul li{
   transform: rotate(-2deg);
 }
 p{
-  font-size:18px;
+  font-size:20px;
+}
+li {
+  font-size:20px;
 }
 /* Subheading */
 h2 {
