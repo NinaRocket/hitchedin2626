@@ -87,7 +87,10 @@ ul li{
 .section{ padding:2rem 2rem; }
 
 /* links adapt to each section */
-.section a{ color:currentColor; text-underline-offset:2px; }
+.section a{ 
+  color:currentColor;  
+  text-decoration: none;
+}
 
 
 .section-story{
@@ -500,13 +503,6 @@ table {
   font-family: 'Quicksand', sans-serif;
   color: var(--c-navy);
   font-weight: 700;
-}
-
-/* Links match the text color in each section */
-.section a {
-  color: currentColor;
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 /* Optional: make body h2 (outside sections) use Quicksand too */
