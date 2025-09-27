@@ -34,8 +34,15 @@
 
       <button type="submit">Send My RSVP 💌</button>
     </form>
-    <p id="rsvp-message"></p>
+   <p id="rsvp-message" role="status" aria-live="polite"></p>
+
+     <div id="rsvp-success" hidden>
+  <h2>Thank you! 💖</h2>
+  <p>We got your RSVP and can’t wait to celebrate with you.</p>
+</div>
   </div>
+
+
 
 <script type="module" src="/js/main.js"></script> 
 <script type="module" src="/js/admin.js"></script> 

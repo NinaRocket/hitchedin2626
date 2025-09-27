@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
   try {
     const newRsvp = await Rsvp.create({ name, attending, guest, guestCount, notes });
-    res.status(201).json({ message: "RSVP saved successfully!", id: newRsvp._id });
+    res.status(201).json({ message: "🎉 RSVP sent successfully! 🎉", id: newRsvp._id });
   } catch (err) {
     console.error("Error saving RSVP:", err);
     res.status(400).json({ error: "Invalid RSVP data" });

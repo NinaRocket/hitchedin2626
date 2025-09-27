@@ -1,3 +1,63 @@
+// const form = document.getElementById("rsvp-form");
+// const message = document.getElementById("rsvp-message");
+
+// const isLocal =
+//   location.hostname === "localhost" || location.hostname.startsWith("127.");
+// const API_BASE = isLocal ? "/api" : "https://api.ninajohnny4ever.com/api";
+
+// if (form) {
+//   form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+
+//     const btn = form.querySelector('button[type="submit"]');
+//     const originalText = btn ? btn.textContent : "";
+//     if (btn) {
+//       btn.disabled = true;
+//       btn.classList.add("is-loading");
+//       btn.textContent = "Sending…";
+//     }
+//     if (message) { message.textContent = ""; message.style.color = ""; }
+
+//     // collect data
+//     const formData = new FormData(form);
+//     const data = Object.fromEntries(formData);
+
+//     try {
+//       const res = await fetch(`${API_BASE}/rsvp`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(data)
+//       });
+
+//       let payload = null;
+//       try { payload = await res.json(); } catch {}
+
+//       if (!res.ok) {
+//         const reason = payload?.error || `Server error (${res.status})`;
+//         throw new Error(reason);
+//       }
+
+//       if (message) {
+//         message.textContent = payload?.message || "🎉 RSVP received! Thank you!";
+//         message.style.color = "#0A9396"; // teal success
+//       }
+//       form.reset();
+
+//     } catch (err) {
+//       console.error(err);
+//       if (message) {
+//         message.textContent = "❌ That didn’t go through. Please try again (or text us).";
+//         message.style.color = "#AE2012"; // red error
+//       }
+//     } finally {
+//       if (btn) {
+//         btn.disabled = false;
+//         btn.classList.remove("is-loading");
+//         btn.textContent = originalText || "Send My RSVP 💌";
+//       }
+//     }
+//   });
+// }
 const form = document.getElementById("rsvp-form");
 const message = document.getElementById("rsvp-message");
 
@@ -9,11 +69,18 @@ if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn ? btn.textContent : "";
+    if (btn) {
+      btn.disabled = true;
+      btn.classList.add("is-loading");
+      btn.textContent = "Sending…";
+    }
+    if (message) { message.textContent = ""; message.style.color = ""; }
+
+    const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      // ✅ keep a handle to the response
       const res = await fetch(`${API_BASE}/rsvp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,18 +91,40 @@ if (form) {
       try { payload = await res.json(); } catch {}
 
       if (!res.ok) {
-        if (message) message.textContent = `❌ ${payload?.error || `Server error (${res.status})`}`;
-        return;
+        const reason = payload?.error || `Server error (${res.status})`;
+        throw new Error(reason);
       }
 
-      if (message) message.textContent = "🎉 RSVP received! Thank you!";
-      form.reset();
+      // ✅ success → fade out + hide the form
+      // form.classList.add("fade-out");
+      // setTimeout(() => { form.style.display = "none"; }, 260);
+      document.getElementById("rsvp-success")?.removeAttribute("hidden");
+form.classList.add("fade-out");
+setTimeout(() => { form.style.display = "none"; }, 260);
+
+
+      if (message) {
+        message.textContent = payload?.message || "🎉 RSVP received! Thank you! 🎉 ";
+        message.style.color = "#0A9396"; 
+      }
+
     } catch (err) {
       console.error(err);
-      if (message) message.textContent = "❌ Network error — is the backend running?";
+      if (message) {
+        message.textContent = "❌ That didn’t go through. Please try again (or text us).";
+        message.style.color = "#AE2012";
+      }
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.remove("is-loading");
+        btn.textContent = originalText || "Send My RSVP 💌";
+      }
     }
   });
 }
+
+
 // --- Slideshow ---
 class Slideshow {
   constructor(root) {
@@ -46,7 +135,7 @@ class Slideshow {
     this.dotsWrap = root.querySelector(".dots");
 
     this.index = 0;
-    this.intervalMs = Number(root.dataset.interval) || 4000;
+    this.intervalMs = Number(root.dataset.interval) || 0o0;
     this.autoplay = (root.dataset.autoplay || "false") === "true";
     this.timer = null;
 

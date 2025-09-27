@@ -573,5 +573,26 @@ h2, h3
   */
 }
 
+/* rsvp sending */
+/* smooth hide on success */
+#rsvp-form.fade-out {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
 
+/* make disabled button look disabled */
+.rsvp-container button[disabled] { opacity:.8; cursor:not-allowed; }
 
+/* add a subtle spinner when we add .is-loading */
+.rsvp-container button.is-loading { position: relative; }
+.rsvp-container button.is-loading::after{
+  content:"";
+  position:absolute; right:12px; top:50%;
+  width:1em; height:1em; border-radius:50%;
+  border:2px solid rgba(255,255,255,.55); border-top-color:#fff;
+  transform:translateY(-50%);
+  animation: rsvp-spin .8s linear infinite;
+}
+@keyframes rsvp-spin { to { transform: translateY(-50%) rotate(1turn); } }

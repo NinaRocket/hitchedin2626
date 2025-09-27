@@ -34,6 +34,11 @@ app.use("/api/admin", rsvpAdmin);
 // Health check
 app.get("/api/health", (_req, res) => res.json({ ok: true, time: new Date().toISOString() }));
 
+app.get('/healthz', (_req, res) => {
+  const mongoUp = mongoose.connection.readyState === 1; // 1 = connected
+  res.status(mongoUp ? 200 : 500).json({ ok: mongoUp });
+});
+
 // --- MongoDB ---
 const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 if (!mongoUri) {
