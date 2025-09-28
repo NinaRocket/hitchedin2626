@@ -598,3 +598,22 @@ h2, h3
 @keyframes rsvp-spin { to { transform: translateY(-50%) rotate(1turn); } }
 
 .add-to-cal { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+/* smooth hide already added earlier */
+#rsvp-form.fade-out{
+  opacity:0;
+  transform: translateY(-4px);
+  pointer-events:none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.rsvp-success{
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 2px dashed var(--c-mint);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 6px 14px rgba(0,18,25,.06);
+}
+#rsvp-success-yes h2 { color: var(--c-teal-900); }
+#rsvp-success-no  h2 { color: var(--c-oxblood); }
