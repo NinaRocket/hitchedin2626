@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const RsvpSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    email: {type: String, required: true},
     attending: { type: Boolean, default: false },
     guest: { type: String, default: "" },
     guestCount: { type: Number, default: 0 },

@@ -23,6 +23,7 @@
         <option value="yes">Yes, can’t wait!</option>
         <option value="no">Sadly can’t make it</option>
       </select>
+      <input type="text" name="email" placeholder="Best Contact Email" />
 
       <input type="text" name="guest" placeholder="Guest name (if any)" />
 
@@ -36,9 +37,17 @@
     </form>
    <p id="rsvp-message" role="status" aria-live="polite"></p>
 
-     <div id="rsvp-success" hidden>
+<div id="rsvp-success" hidden>
   <h2>Thank you! 💖</h2>
-  <p>We got your RSVP and can’t wait to celebrate with you.</p>
+  <p>We got your RSVP and can’t wait to celebrate with you.
+    <br>
+    Parking information and any further details will be sent out two weeks before the event. 
+  </p>
+  <div class="add-to-cal">
+  <button class="cta-button" id="add-gcal">Add to Google Calendar</button>
+  <button class="cta-button" id="add-ics">Add to Apple/Outlook (.ics)</button>
+</div>
+
 </div>
   </div>
 

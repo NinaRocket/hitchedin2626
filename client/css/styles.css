@@ -596,3 +596,5 @@ h2, h3
   animation: rsvp-spin .8s linear infinite;
 }
 @keyframes rsvp-spin { to { transform: translateY(-50%) rotate(1turn); } }
+
+.add-to-cal { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }

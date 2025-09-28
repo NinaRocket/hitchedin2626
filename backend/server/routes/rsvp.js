@@ -12,10 +12,10 @@ const router = Router();
  */
 router.post("/", async (req, res) => {
   console.log("Received RSVP:", req.body);
-  const { name, attending, guest, guestCount, notes } = req.body;
+  const { name, email, attending, guest, guestCount, notes } = req.body;
 
   try {
-    const newRsvp = await Rsvp.create({ name, attending, guest, guestCount, notes });
+    const newRsvp = await Rsvp.create({ name, email, attending, guest, guestCount, notes });
     res.status(201).json({ message: "🎉 RSVP sent successfully! 🎉", id: newRsvp._id });
   } catch (err) {
     console.error("Error saving RSVP:", err);

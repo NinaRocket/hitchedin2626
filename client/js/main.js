@@ -219,3 +219,102 @@ class Slideshow {
 
 // init any .slideshow on the page
 document.querySelectorAll(".slideshow").forEach(el => new Slideshow(el));
+
+// ---- Add-to-calendar ----
+const eventInfo = {
+  title: "Nina & Johnny – Celebration of Love",
+  start: "2025-11-22T16:00:00-07:00", // 4:00pm America/Phoenix
+  end:   "2025-11-22T21:00:00-07:00", // 9:00pm America/Phoenix
+  location: "4144 W Wethersfield Rd, Phoenix, AZ 85029",
+  description:
+    "Backyard reception! Cake, food, snacks, drinks & fun!",
+  url: "https://ninajohnny4ever.com",
+  tz: "America/Phoenix"
+};
+
+// Helpers
+const pad = n => (n < 10 ? "0" + n : "" + n);
+const fmtUTC = (iso) => {
+  // 2025-11-22T16:00-07:00 -> 20251122T230000Z (UTC for Google)
+  const d = new Date(iso);
+  return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+};
+const fmtLocalICS = (iso) => {
+  // Local (with TZID in ICS)
+  const d = new Date(iso);
+  return [
+    d.getFullYear(),
+    pad(d.getMonth() + 1),
+    pad(d.getDate())
+  ].join("") + "T" + [pad(d.getHours()), pad(d.getMinutes()), pad(d.getSeconds())].join("");
+};
+const escICS = (s) => String(s).replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n");
+
+function googleCalURL(evt) {
+  const dates = `${fmtUTC(evt.start)}/${fmtUTC(evt.end)}`;
+  const base = "https://www.google.com/calendar/render?action=TEMPLATE";
+  const params = new URLSearchParams({
+    text: evt.title,
+    dates,
+    location: evt.location,
+    details: `${evt.description}\n${evt.url}`
+  });
+  return `${base}&${params.toString()}`;
+}
+
+function buildICS(evt) {
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//NinaJohnny//Wedding//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VTIMEZONE",
+    `TZID:${evt.tz}`,
+    "X-LIC-LOCATION:" + evt.tz,
+    // Phoenix is MST all year (UTC-7). One STANDARD block is fine.
+    "BEGIN:STANDARD",
+    "TZOFFSETFROM:-0700",
+    "TZOFFSETTO:-0700",
+    "TZNAME:MST",
+    "DTSTART:19700101T000000",
+    "END:STANDARD",
+    "END:VTIMEZONE",
+    "BEGIN:VEVENT",
+    `UID:${Date.now()}@ninajohnny4ever.com`,
+    `DTSTAMP:${fmtUTC(new Date().toISOString()).replace(/Z$/, "Z")}`,
+    `DTSTART;TZID=${evt.tz}:${fmtLocalICS(evt.start)}`,
+    `DTEND;TZID=${evt.tz}:${fmtLocalICS(evt.end)}`,
+    `SUMMARY:${escICS(evt.title)}`,
+    `DESCRIPTION:${escICS(evt.description)}\\n${escICS(evt.url)}`,
+    `LOCATION:${escICS(evt.location)}`,
+    `URL:${evt.url}`,
+    "END:VEVENT",
+    "END:VCALENDAR"
+  ];
+  // Use CRLF for maximum compatibility
+  return lines.join("\r\n");
+}
+
+function downloadICS(content, filename = "event.ics") {
+  const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// Wire up buttons
+document.getElementById("add-gcal")?.addEventListener("click", () => {
+  const url = googleCalURL(eventInfo);
+  window.open(url, "_blank", "noopener");
+});
+
+document.getElementById("add-ics")?.addEventListener("click", () => {
+  const ics = buildICS(eventInfo);
+  downloadICS(ics, "NinaJohnny-Celebration-2025-11-22.ics");
+});

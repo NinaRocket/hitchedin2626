@@ -48,6 +48,7 @@ function renderRows(rows) {
 
     tr.innerHTML = `
       <td>${rsvp.name ?? ""}</td>
+       <td>${rsvp.email ?? ""}</td>
       <td>${attendingBool ? "yes" : "no"}</td>
       <td>${rsvp.guest ?? ""}</td>
       <td>${rsvp.guestCount ?? ""}</td>
