@@ -7,7 +7,7 @@ const RsvpSchema = new mongoose.Schema(
     email: {type: String, required: true},
     attending: { type: Boolean, default: false },
     guest: { type: String, default: "" },
-    guestCount: { type: Number, default: 0 },
+    guestCount: { type: String, default: 0 },
     notes: { type: String, default: "" }
   },
   { timestamps: true } // adds createdAt / updatedAt
