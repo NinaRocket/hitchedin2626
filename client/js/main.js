@@ -70,7 +70,7 @@ message?.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (err) {
       console.error(err);
       if (message) {
-        message.textContent = "❌ That didn’t go through. Please try again (or text us).";
+        message.textContent = "❌ That didn’t go through. The server could be busy - try again or reach out for assistance.";
         message.style.color = "#AE2012";
       }
     } finally {
